@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إدارة محتوى البورتفوليو</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Lalezar&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0a0a0d;--surface:#16161d;--surface-2:#1d1d26;--border:rgba(255,255,255,.1);--text:#f2ede4;--muted:#9a968f;--orange:#ff5a1f;--orange-2:#ff9247;--danger:#ff8b81}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{min-height:100vh;background:radial-gradient(circle at 90% 0%,rgba(255,90,31,.16),transparent 34%),linear-gradient(135deg,#0a0a0d,#14141a 55%,#0c0c10);color:var(--text);font-family:Cairo,sans-serif;line-height:1.6}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(to bottom,#000,transparent 80%)}
+    .shell{position:relative;width:min(1120px,92%);margin:auto;padding:54px 0 70px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:42px}
+    .brand{display:flex;align-items:center;gap:14px}.brand img{width:118px;height:36px;object-fit:contain}.brand span{color:var(--muted);font-size:.86rem;border-right:1px solid var(--border);padding-right:14px}
+    .back{display:inline-flex;align-items:center;gap:8px;color:var(--orange-2);border:1px solid rgba(255,146,71,.35);border-radius:10px;padding:9px 15px;background:rgba(255,90,31,.07);text-decoration:none;font-size:.86rem;transition:.2s}.back:hover{background:rgba(255,90,31,.16);transform:translateY(-2px)}
+    .intro{margin-bottom:28px}.eyebrow{color:var(--orange-2);font-size:.85rem;margin-bottom:7px}.intro h1{font:400 clamp(2rem,5vw,3.6rem)/1.1 Lalezar,Cairo,sans-serif}.intro p{color:var(--muted);margin-top:8px;max-width:650px}
+    .layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(290px,.75fr);gap:22px;align-items:start}.panel{border:1px solid var(--border);border-radius:18px;background:linear-gradient(160deg,rgba(29,29,38,.96),rgba(22,22,29,.96));box-shadow:0 22px 60px rgba(0,0,0,.3);padding:24px}.panel h2{font:400 1.4rem Lalezar,Cairo,sans-serif;margin-bottom:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.hint{color:var(--muted);font-size:.78rem}
+    .form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{color:var(--muted);font-size:.78rem}.field input,.field textarea,.field select{width:100%;border:1px solid var(--border);border-radius:9px;padding:11px 12px;background:#101016;color:var(--text);font:inherit;outline:none}.field textarea{min-height:92px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,90,31,.1)}
+    .actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:5px}.button{border:0;border-radius:9px;padding:10px 16px;font:700 .82rem Cairo,sans-serif;cursor:pointer;transition:.2s}.button:hover{transform:translateY(-2px)}.primary{background:linear-gradient(135deg,var(--orange),var(--orange-2));color:#0a0a0d}.secondary{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text)}
+    .projects{display:grid;gap:10px}.project{display:flex;align-items:center;gap:13px;padding:12px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.025)}.thumb{width:62px;height:62px;flex:none;border-radius:9px;background:#101016 center/cover no-repeat;border:1px solid var(--border)}.project-info{min-width:0;flex:1}.project-info strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.9rem}.project-info span{color:var(--muted);font-size:.75rem}.project-actions{display:flex;gap:7px;flex:none}.small{padding:7px 10px;font-size:.75rem}.edit{color:var(--orange-2)}.delete{color:var(--danger)}.empty{color:var(--muted);font-size:.85rem;padding:18px 0;text-align:center}
+    .status{min-height:24px;margin-top:14px;color:var(--orange-2);font-size:.8rem}.file-label{display:inline-flex;align-items:center;cursor:pointer}.file-label input{display:none}
+    @media(max-width:800px){.layout{grid-template-columns:1fr}.shell{padding-top:28px}.topbar{margin-bottom:30px}}
+    @media(max-width:560px){.brand span{display:none}.form{grid-template-columns:1fr}.field.full{grid-column:auto}.panel{padding:18px}.project{align-items:flex-start;flex-wrap:wrap}.project-actions{width:100%;padding-right:75px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><img src="gad-logo-white-orange.png" alt="gad81cc.com"><span>لوحة إدارة المحتوى</span></div>
+      <a class="back" href="Untitled-1.html">العودة للبورتفوليو <span aria-hidden="true">←</span></a>
+    </header>
+
+    <section class="intro">
+      <div class="eyebrow">CONTENT MANAGER</div>
+      <h1>إدارة مشاريع البورتفوليو</h1>
+      <p>أضف مشروعًا جديدًا أو عدّل المشاريع الحالية. البيانات محفوظة على هذا المتصفح، وتظهر تلقائيًا في صفحة البورتفوليو.</p>
+    </section>
+
+    <div class="layout">
+      <section class="panel">
+        <div class="panel-head"><h2 id="formTitle">إضافة مشروع جديد</h2><span class="hint">الحقول المطلوبة بعلامة *</span></div>
+        <form id="projectForm" class="form">
+          <input type="hidden" id="projectId">
+          <div class="field"><label for="projectTitle">اسم المشروع *</label><input id="projectTitle" required placeholder="مثال: متعة الصيف"></div>
+          <div class="field"><label for="projectType">النوع</label><select id="projectType"><option value="project">مشروع</option><option value="campaign">حملة</option><option value="content">محتوى</option></select></div>
+          <div class="field full"><label for="projectDescription">وصف مختصر *</label><textarea id="projectDescription" required placeholder="اكتب وصفًا بسيطًا للعمل"></textarea></div>
+          <div class="field"><label for="projectImage">رابط الصورة أو مسارها</label><input id="projectImage" placeholder="https://... أو assets/image.png"></div>
+          <div class="field"><label for="projectUpload">أو ارفع صورة من جهازك</label><input id="projectUpload" type="file" accept="image/*"></div>
+          <div class="field full"><label for="projectLink">رابط المشروع</label><input id="projectLink" type="url" placeholder="https://... أو اسم ملف HTML"></div>
+          <div class="actions full">
+            <button class="button primary" type="submit">حفظ المشروع</button>
+            <button class="button secondary" id="newProject" type="button">مشروع جديد</button>
+            <button class="button secondary" id="exportProjects" type="button">تصدير نسخة احتياطية</button>
+            <label class="button secondary file-label">استيراد نسخة احتياطية<input id="importProjects" type="file" accept="application/json"></label>
+          </div>
+        </form>
+        <div class="status" id="status" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="panel"><div class="panel-head"><h2>المشاريع الحالية</h2><span class="hint" id="projectCount"></span></div><div class="projects" id="projects"></div></section>
+    </div>
+  </main>
+
+  <script>
+    const storageKey = 'mohamed-portfolio-projects';
+    const defaults = [
+      {id:'summer',title:'متعة الصيف — تصميم سوشيال',description:'تصميم سوشيال ميديا لحملة صيفية',type:'project',image:'assets/summer.png',link:'summer.html'},
+      {id:'ramadan',title:'أهم أعمالي في عروض رمضان',description:'مجموعة مختارة من تصميمات عروض رمضان',type:'project',image:'assets/ramadan.png',link:'ramadan.html'},
+      {id:'hajj',title:'حملة الحج',description:'تصميمات حملة سوشيال ميديا لحوتب للسياحة',type:'campaign',image:'assets/hajj.webp',link:'hajj.html'},
+      {id:'umrah',title:'مشروع العمرة',description:'مجموعة تصميمات سوشيال ميديا لحوتب للسياحة',type:'project',image:'assets/umrah.jpeg',link:'umrah.html'},
+      {id:'smsma',title:'الهوية البصرية لـ SMSMA Shop',description:'هوية بصرية وتطبيقات سوشيال ميديا',type:'content',image:'assets/smsma.jpg',link:'smsma.html'}
+    ];
+    const $ = id => document.getElementById(id);
+    const typeLabels = {project:'مشروع فردي',campaign:'حملة',content:'محتوى'};
+    function getProjects(){try{const data=JSON.parse(localStorage.getItem(storageKey));return Array.isArray(data)?data:defaults}catch(error){return defaults}}
+    function saveProjects(projects){localStorage.setItem(storageKey,JSON.stringify(projects));}
+    function notify(message){$('status').textContent=message;window.setTimeout(()=>{$('status').textContent=''},3000)}
+    function render(){const projects=$('projects');projects.replaceChildren();const data=getProjects();$('projectCount').textContent=`${data.length} مشاريع`;if(!data.length){projects.innerHTML='<p class="empty">لا توجد مشاريع حتى الآن.</p>';return}data.forEach(project=>{const item=document.createElement('article');item.className='project';const thumb=document.createElement('div');thumb.className='thumb';if(project.image)thumb.style.backgroundImage=`url(${JSON.stringify(project.image)})`;const info=document.createElement('div');info.className='project-info';const title=document.createElement('strong');title.textContent=project.title;const type=document.createElement('span');type.textContent=typeLabels[project.type]||typeLabels.project;info.append(title,type);const actions=document.createElement('div');actions.className='project-actions';const edit=document.createElement('button');edit.className='button secondary small edit';edit.type='button';edit.textContent='تعديل';edit.onclick=()=>fillForm(project);const remove=document.createElement('button');remove.className='button secondary small delete';remove.type='button';remove.textContent='حذف';remove.onclick=()=>{if(confirm(`حذف مشروع «${project.title}»؟`)){saveProjects(getProjects().filter(item=>item.id!==project.id));render();notify('تم حذف المشروع')}};actions.append(edit,remove);item.append(thumb,info,actions);projects.append(item)})}
+    function resetForm(){$('projectForm').reset();$('projectId').value='';$('formTitle').textContent='إضافة مشروع جديد';$('projectTitle').focus()}
+    function fillForm(project){$('projectId').value=project.id;$('projectTitle').value=project.title;$('projectDescription').value=project.description;$('projectType').value=project.type||'project';$('projectImage').value=project.image&&project.image.startsWith('data:')?'':project.image||'';$('projectLink').value=project.link||'';$('projectUpload').value='';$('formTitle').textContent='تعديل المشروع';$('projectTitle').focus()}
+    function readImage(file){return new Promise((resolve,reject)=>{if(!file)return resolve('');const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)})}
+    $('projectForm').addEventListener('submit',async event=>{event.preventDefault();const id=$('projectId').value||`project-${Date.now()}`;const data=getProjects();const existing=data.find(project=>project.id===id);const uploaded=await readImage($('projectUpload').files[0]);const project={id,title:$('projectTitle').value.trim(),description:$('projectDescription').value.trim(),type:$('projectType').value,image:uploaded||$('projectImage').value.trim()||existing?.image||'',link:$('projectLink').value.trim()};saveProjects(existing?data.map(item=>item.id===id?project:item):[...data,project]);render();resetForm();notify('تم حفظ المشروع بنجاح')});
+    $('newProject').onclick=resetForm;
+    $('exportProjects').onclick=()=>{const blob=new Blob([JSON.stringify(getProjects(),null,2)],{type:'application/json'});const link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download='mohamed-portfolio-content.json';link.click();URL.revokeObjectURL(link.href);notify('تم تصدير النسخة الاحتياطية')};
+    $('importProjects').onchange=event=>{const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);if(!Array.isArray(data))throw new Error('invalid');saveProjects(data);render();notify('تم استيراد النسخة الاحتياطية')}catch(error){notify('ملف النسخة الاحتياطية غير صالح')}event.target.value=''};reader.readAsText(file)};
+    render();
+  </script>
+</body>
+</html>
